@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Plant</title>
+    </head>
+    <body>
+        <h1>Plant details</h1>
+        <ul>
+                <li>Id: {{ plant.id }}</li>
+                <li>Species: {{ plant.species }}</li>
+                <li>Variety: {{ plant.variety }}</li>
+                <li>Toxicity: {{ plant.toxicity ? 'yes' : 'no' }}</li>
+                {% if plant.specialFeatures is not null %}
+                    <li>Special features: {{ plant.specialFeatures }}</li> {% endif %}
+                <li>Data nabycia: {{ plant.dateOfPurchase|date('Y-m-d') }}</li>
+                <br/>
+        </ul>
+    </body>
+</html>

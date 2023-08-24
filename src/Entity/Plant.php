@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,13 +26,21 @@ class Plant
     private ?bool $toxicity = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateOfPurchase = null;
+    private ?\DateTime $dateOfPurchase = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $specialFeatures = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateOfLastWatering = null;
+    private ?\DateTime $dateOfLastWatering = null;
+
+    #[ORM\OneToMany(mappedBy: 'plant', targetEntity: Watering::class)]
+    private Collection $waterings;
+
+    public function __construct()
+    {
+        $this->waterings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,6 +115,33 @@ class Plant
     public function setDateOfLastWatering(?\DateTimeInterface $dateOfLastWatering): static
     {
         $this->dateOfLastWatering = $dateOfLastWatering;
+
+        return $this;
+    }
+
+    public function getWaterings(): Collection
+    {
+        return $this->waterings;
+    }
+
+    public function addWatering(Watering $watering): static
+    {
+        if (!$this->waterings->contains($watering)) {
+            $this->waterings->add($watering);
+            $watering->setPlant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWatering(Watering $watering): static
+    {
+        if ($this->waterings->removeElement($watering)) {
+            // set the owning side to null (unless already changed)
+            if ($watering->getPlant() === $this) {
+                $watering->setPlant(null);
+            }
+        }
 
         return $this;
     }
