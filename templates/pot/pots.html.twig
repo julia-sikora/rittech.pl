@@ -6,7 +6,6 @@
     </head>
     <body>
         <h1>Pots list:</h1>
-        {% for pot in pots %}
             <table>
                 <tr>
                     <th>Id</th>
@@ -14,17 +13,21 @@
                     <th>Colour</th>
                     <th>Diameter</th>
                     <th>Code</th>
+                    <th>Plant</th>
                 </tr>
+                {% for pot in pots %}
                 <tr>
                     <td>{{ pot.id }}</td>
                     <td>{{ pot.producer }}</td>
                     <td>{{ pot.colour }}</td>
                     <td>{{ pot.potDiameter }}</td>
                     <td>{{ pot.potCode }}</td>
+                    <td>{{ pot.plant.variety|default }} {{ pot.plant.species|default }}</td>
                 </tr>
+                {% endfor %}
             </table>
             &nbsp &nbsp
             <br/>
-        {% endfor %}
+
     </body>
 </html>

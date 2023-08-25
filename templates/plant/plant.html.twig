@@ -10,6 +10,7 @@
                 <li>Id: {{ plant.id }}</li>
                 <li>Species: {{ plant.species }}</li>
                 <li>Variety: {{ plant.variety }}</li>
+                <li>Pot: {{ plant.plantPot.producer }}, {{ plant.plantPot.colour }}</li>
                 <li>Toxicity: {{ plant.toxicity ? 'yes' : 'no' }}</li>
                 {% if plant.specialFeatures is not null %}
                     <li>Special features: {{ plant.specialFeatures }}</li> {% endif %}

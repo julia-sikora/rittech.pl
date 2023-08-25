@@ -25,6 +25,9 @@ class PlantPot
     #[ORM\Column]
     private ?float $potDiameter = null;
 
+    #[ORM\OneToOne(mappedBy: 'plantPot', cascade: ['persist', 'remove'])]
+    private ?Plant $plant = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,28 @@ class PlantPot
     public function setPotDiameter(float $potDiameter): static
     {
         $this->potDiameter = $potDiameter;
+
+        return $this;
+    }
+
+    public function getPlant(): ?Plant
+    {
+        return $this->plant;
+    }
+
+    public function setPlant(?Plant $plant): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($plant === null && $this->plant !== null) {
+            $this->plant->setPlantPot(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($plant !== null && $plant->getPlantPot() !== $this) {
+            $plant->setPlantPot($this);
+        }
+
+        $this->plant = $plant;
 
         return $this;
     }

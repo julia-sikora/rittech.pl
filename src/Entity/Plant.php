@@ -37,7 +37,7 @@ class Plant
     #[ORM\OneToMany(mappedBy: 'plant', targetEntity: Watering::class)]
     private Collection $waterings;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'plant', cascade: ['persist', 'remove'])]
     private ?PlantPot $plantPot = null;
 
     public function __construct()
