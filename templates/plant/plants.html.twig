@@ -9,12 +9,12 @@
         <ul>
             {% for plant in plants %}
                 <li>
-                    <a href="{{ path("app_plant", {id: plant.id}) }}">
+                    <a href="{{ path("app_plant_plant", {id: plant.id}) }}">
                         {{ plant.id }}. {{ plant.species }} {{ plant.variety }}</a>
                     &nbsp &nbsp
-                    <a href="{{ path("app_list", {id: plant.id}) }}">
+                    <a href="{{ path("app_plant_list", {id: plant.id}) }}">
 {{ plant.dateOfLastWatering is empty ? "" : plant.dateOfLastWatering|date("m/d/Y") }}</a>
-                    <a href="{{ path("app_water", {id: plant.id}) }}">podlej</a>
+                    <a href="{{ path("app_plant_water", {id: plant.id}) }}">podlej</a>
                 </li>
                 <br/>
             {% endfor %}

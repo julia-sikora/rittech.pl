@@ -13,15 +13,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/plant')]
 class PlantController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
+    #[Route('/', name: 'app_plant_index')]
     public function index(): Response
     {
-        return $this->render('index.html.twig');
+        return $this->render('plant/index.html.twig');
     }
 
-    #[Route('/new', name: 'app_new')]
+    #[Route('/new', name: 'app_plant_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $plant = new Plant();
@@ -32,12 +33,14 @@ class PlantController extends AbstractController
             $entityManager->flush();
             return new Response('New plant had been added!');
         }
-        return $this->render('new.html.twig', ['form' => $form]);
+        return $this->render('plant/new.html.twig', ['form' => $form]);
     }
 
-    #[Route('/edit/{id}', name: 'app_edit')]
+    #[Route('/edit/{id}', name: 'app_plant_edit')]
     public function edit(Plant $plant, Request $request, EntityManagerInterface $entityManager): Response
     {
+        //mozemy wyszukac ktory to plant po {id}
+        //ale symfony samo to robi po dopasowaniu {id} do "Plant $plant"
         $form = $this->createForm(PlantType::class, $plant);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -45,34 +48,34 @@ class PlantController extends AbstractController
             $entityManager->flush();
             return new Response('Plant had been edited!');
         }
-        return $this->render('new.html.twig', ['form' => $form]);
+        return $this->render('plant/new.html.twig', ['form' => $form]);
     }
 
-    #[Route('/plants', name: 'app_plants')]
+    #[Route('/plants', name: 'app_plant_plants')]
     public function plants(PlantRepository $plantRepository): Response
     {
-        return $this->render('plants.html.twig',
+        return $this->render('plant/plants.html.twig',
             ['plants' => $plantRepository->findAll()]);
     }
 
-    #[Route('/plant/{id}', name: 'app_plant')]
+    #[Route('/plant/{id}', name: 'app_plant_plant')]
     public function plant($id, PlantRepository $plantRepository): Response
     {
-        return $this->render('plant.html.twig',
+        return $this->render('plant/plant.html.twig',
             ['plant' => $plantRepository->find($id)]);
     }
 
-    #[Route('/list/{id}', name: 'app_list')]
+    #[Route('/list/{id}', name: 'app_plant_list')]
     public function list($id, PlantRepository $plantRepository): Response
     {
-        return $this->render('list.html.twig',
+        return $this->render('plant/list.html.twig',
             ['plant' => $plantRepository->find($id)]);
     }
 
-    #[Route('/water/{id}', name: 'app_water')]
+    #[Route('/water/{id}', name: 'app_plant_water')]
     public function water(PlantService $plantService, Plant $plant): Response
     {
         $plantService->water($plant);
-        return $this->redirectToRoute("app_plants");
+        return $this->redirectToRoute("app_plant_plants");
     }
 }

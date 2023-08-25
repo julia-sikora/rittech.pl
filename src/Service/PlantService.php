@@ -5,7 +5,6 @@ namespace App\Service;
 
 use App\Entity\Plant;
 use App\Entity\Watering;
-use App\Repository\PlantRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
