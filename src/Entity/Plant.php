@@ -37,6 +37,9 @@ class Plant
     #[ORM\OneToMany(mappedBy: 'plant', targetEntity: Watering::class)]
     private Collection $waterings;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?PlantPot $plantPot = null;
+
     public function __construct()
     {
         $this->waterings = new ArrayCollection();
@@ -142,6 +145,18 @@ class Plant
                 $watering->setPlant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlantPot(): ?PlantPot
+    {
+        return $this->plantPot;
+    }
+
+    public function setPlantPot(?PlantPot $plantPot): static
+    {
+        $this->plantPot = $plantPot;
 
         return $this;
     }
