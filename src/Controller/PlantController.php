@@ -19,12 +19,14 @@ class PlantController extends AbstractController
     #[Route('/', name: 'app_plant_index')]
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         return $this->render('plant/index.html.twig');
     }
 
     #[Route('/new', name: 'app_plant_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         $plant = new Plant();
         $form = $this->createForm(PlantType::class, $plant);
         $form->handleRequest($request);
@@ -39,6 +41,7 @@ class PlantController extends AbstractController
     #[Route('/edit/{id}', name: 'app_plant_edit')]
     public function edit(Plant $plant, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         //mozemy wyszukac ktory to plant po {id}
         //ale symfony samo to robi po dopasowaniu {id} do "Plant $plant"
         $form = $this->createForm(PlantType::class, $plant);
@@ -54,6 +57,7 @@ class PlantController extends AbstractController
     #[Route('/plants', name: 'app_plant_plants')]
     public function plants(PlantRepository $plantRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         return $this->render('plant/plants.html.twig',
             ['plants' => $plantRepository->findAll()]);
     }
@@ -61,6 +65,7 @@ class PlantController extends AbstractController
     #[Route('/plant/{id}', name: 'app_plant_plant')]
     public function plant($id, PlantRepository $plantRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         return $this->render('plant/plant.html.twig',
             ['plant' => $plantRepository->find($id)]);
     }
@@ -68,6 +73,7 @@ class PlantController extends AbstractController
     #[Route('/list/{id}', name: 'app_plant_list')]
     public function list($id, PlantRepository $plantRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         return $this->render('plant/list.html.twig',
             ['plant' => $plantRepository->find($id)]);
     }
@@ -75,6 +81,7 @@ class PlantController extends AbstractController
     #[Route('/water/{id}', name: 'app_plant_water')]
     public function water(PlantService $plantService, Plant $plant): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         $plantService->water($plant);
         return $this->redirectToRoute("app_plant_plants");
     }

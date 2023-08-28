@@ -16,12 +16,14 @@ class PlantPotController extends AbstractController
 #[Route('/list', name: 'app_pot_list')]
 public function list(PlantPotRepository $plantPotRepository):Response
 {
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
     $pots = $plantPotRepository->findAll();
     return $this->render('pot/pots.html.twig',["pots"=>$pots]);
 }
 #[Route('/new', name: 'app_new')]
 public function new(Request $request, EntityManagerInterface $entityManager):Response
 {
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
     $pot = new PlantPot();
     $form = $this->createForm(PlantPotType::class, $pot);
     $form->handleRequest($request);
@@ -36,6 +38,7 @@ public function new(Request $request, EntityManagerInterface $entityManager):Res
 #[Route('/edit/{id}', name: "app_pot_edit")]
 public function edit(PlantPot $plantPot, Request $request, EntityManagerInterface $entityManager):Response
 {
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
     $form = $this->createForm(PlantPotType::class, $plantPot);
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid())
