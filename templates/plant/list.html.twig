@@ -18,13 +18,16 @@
         <ul>
             {% for plant in plants %}
                 <li>
+
                     <a href="{{ path("app_plant_plant", {id: plant.id}) }}">
                         {{ plant.id }}. {{ plant.species }} {{ plant.variety }}</a>
-
-                    &nbsp &nbsp
-
-                    <a href="{{ path("app_plant_waterings", {id: plant.id}) }}">
-                        {{ plant.waterings.last is empty ? "brak podlewań" : plant.waterings.last.date|date("m/d/Y h:i:s") }}</a>
+                    &nbsp
+                    {% if plant.waterings.last is empty %}
+                        brak podlewań
+                    &nbsp
+                    {% elseif plant.waterings.last is not empty %}
+                        <a href="{{ path("app_plant_waterings", {id: plant.id}) }}">{{ plant.waterings.last.date|date("m/d/Y h:i:s") }}</a>
+                    {% endif %}
 
                     <a href="{{ path("app_plant_water", {id: plant.id}) }}">podlej</a>
                     <a href="{{ path("app_plant_delete", {id: plant.id}) }}">usuń</a>

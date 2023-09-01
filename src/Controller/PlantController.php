@@ -7,7 +7,6 @@ use App\Entity\Plant;
 use App\Entity\Watering;
 use App\Form\PlantType;
 use App\Repository\PlantRepository;
-use App\Repository\WateringRepository;
 use App\Service\PlantService;
 use App\Service\WateringService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -120,7 +119,7 @@ class PlantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $wateringService->delete($watering);
             $this->addFlash('success', 'Watering has been deleted!');
-            return $this->redirectToRoute('app_plant_waterings', ['id'=>$watering->getPlant()->getId()]);
+            return $this->redirectToRoute('app_plant_list', ['id'=>$watering->getPlant()->getId()]);
         }
         return $this->render('waterings/delete.html.twig', ['form' => $form, 'watering' => $watering]);
     }
