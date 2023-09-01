@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Filament;
 use App\Entity\Plant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,7 +21,6 @@ class PlantRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Plant::class);
     }
-
 //    /**
 //     * @return Plant[] Returns an array of Plant objects
 //     */
@@ -45,4 +45,5 @@ class PlantRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

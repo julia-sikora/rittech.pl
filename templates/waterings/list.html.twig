@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Plants</title>
+    </head>
+    <body>
+        <h1>List:</h1>
+        {{ plant.id }}. {{ plant.species }} {{ plant.variety }}
+        <br/>
+        {% for watering in plant.waterings %}
+            <li>
+                {{ watering.date.format('m/d/Y h:i:s')|default('') }}
+                <a href="{{ path('app_plant_watering_delete', {id: watering.id}) }}">usuń</a>
+            </li>
+        {% endfor %}
+    </body>
+</html>

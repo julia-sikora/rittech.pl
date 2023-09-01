@@ -11,17 +11,16 @@ use Doctrine\ORM\EntityManagerInterface;
 class PlantService
 {
     public function __construct(private EntityManagerInterface $entityManager)
-    {}
-    public function water(Plant $plant)
     {
-        $plant->setDateOfLastWatering(new DateTime());
-        $this->entityManager->persist($plant);
+    }
 
-        $watering = new Watering();
-        $watering->setDate(new DateTime());
-        $watering->setPlant($plant);
-        $this->entityManager->persist($watering);
-
+    public function delete(Plant $plant):void
+    {
+        $waterings = $plant->getWaterings();
+        foreach ($waterings as $watering) {
+            $this->entityManager->remove($watering);
+        }
+        $this->entityManager->remove($plant);
         $this->entityManager->flush();
     }
 }

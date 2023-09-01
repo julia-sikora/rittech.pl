@@ -31,9 +31,6 @@ class Plant
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $specialFeatures = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTime $dateOfLastWatering = null;
-
     #[ORM\OneToMany(mappedBy: 'plant', targetEntity: Watering::class)]
     private Collection $waterings;
 
@@ -106,18 +103,6 @@ class Plant
     public function setSpecialFeatures(?string $specialFeatures): static
     {
         $this->specialFeatures = $specialFeatures;
-
-        return $this;
-    }
-
-    public function getDateOfLastWatering(): ?\DateTimeInterface
-    {
-        return $this->dateOfLastWatering;
-    }
-
-    public function setDateOfLastWatering(?\DateTimeInterface $dateOfLastWatering): static
-    {
-        $this->dateOfLastWatering = $dateOfLastWatering;
 
         return $this;
     }

@@ -20,15 +20,14 @@ class PlantType extends AbstractType
         $builder
             ->add('species', TextType::class)
             ->add('variety', TextType::class)
-            ->add('toxicity', CheckboxType::class)
+            ->add('toxicity', CheckboxType::class, ['required' => false])
             ->add('dateOfPurchase', DateType::class)
             ->add('specialFeatures', TextType::class, ['required' => false])
             ->add('plantPot', EntityType::class,
                 ['class' => PlantPot::class, 'choice_label' =>
                     function (PlantPot $plantPot): string {
                         return $plantPot->getProducer() . " " . $plantPot->getColour();
-                    }
-                ])
+                    },'required' => false])
             ->add('save', SubmitType::class);
     }
 

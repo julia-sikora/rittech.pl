@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Delete</title>
+    </head>
+    <body>
+        Czy na pewno chcesz usunąć {{ watering.id }}. {{ watering.date.format('m/d/Y')|default('') }} ?
+        {{ form(form) }}
+    </body>
+</html>

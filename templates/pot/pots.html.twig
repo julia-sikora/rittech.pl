@@ -5,7 +5,13 @@
         <title>Pots</title>
     </head>
     <body>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
         <h1>Pots list:</h1>
+        {% if pots is not empty %}
             <table>
                 <tr>
                     <th>Id</th>
@@ -15,19 +21,25 @@
                     <th>Code</th>
                     <th>Plant</th>
                 </tr>
+
                 {% for pot in pots %}
-                <tr>
-                    <td>{{ pot.id }}</td>
-                    <td>{{ pot.producer }}</td>
-                    <td>{{ pot.colour }}</td>
-                    <td>{{ pot.potDiameter }}</td>
-                    <td>{{ pot.potCode }}</td>
-                    <td>{{ pot.plant.variety|default }} {{ pot.plant.species|default }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ pot.id }}</td>
+                        <td>{{ pot.producer }}</td>
+                        <td>{{ pot.colour }}</td>
+                        <td>{{ pot.potDiameter }}</td>
+                        <td>{{ pot.potCode }}</td>
+                        <td>{{ pot.plant.variety|default }} {{ pot.plant.species|default }}</td>
+                        <td><a href="{{ path("app_pot_edit", {'id': pot.id}) }}">edytuj</a></td>
+                        <td><a href="{{ path('app_pot_delete', {'id': pot.id}) }}">Usuń</a></td>
+                    </tr>
                 {% endfor %}
             </table>
-            &nbsp &nbsp
-            <br/>
+        {% endif %}
+
+        {% if pots is empty %}
+            Brak dostępnych doniczek? <a href="{{ path('app_pot_new') }}">Stwórz nową!</a>
+        {% endif %}
 
     </body>
 </html>

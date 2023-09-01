@@ -5,13 +5,36 @@
         <title>Plants</title>
     </head>
     <body>
-        <h1>List:</h1>
-        {{ plant.id }}. {{ plant.species }} {{ plant.variety }}
-        <br/>
-        {% for watering in plant.waterings %}
-            <li>
-                {{ watering.date.format('m/d/Y')|default('') }}
-            </li>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
         {% endfor %}
+        {% if (plant is defined) and (plant is not null) %}
+            last added plant: {{ plant.id }}. {{ plant.variety }} {{ plant.species }}
+        {% endif %}
+        <h1>Plants list:</h1>
+        <a href="{{ path("app_plant_water_all") }}">podlej wszystkie</a>
+        <ul>
+            {% for plant in plants %}
+                <li>
+                    <a href="{{ path("app_plant_plant", {id: plant.id}) }}">
+                        {{ plant.id }}. {{ plant.species }} {{ plant.variety }}</a>
+
+                    &nbsp &nbsp
+
+                    <a href="{{ path("app_plant_waterings", {id: plant.id}) }}">
+                        {{ plant.waterings.last is empty ? "brak podlewań" : plant.waterings.last.date|date("m/d/Y h:i:s") }}</a>
+
+                    <a href="{{ path("app_plant_water", {id: plant.id}) }}">podlej</a>
+                    <a href="{{ path("app_plant_delete", {id: plant.id}) }}">usuń</a>
+                    <a href="{{ path("app_plant_edit", {id: plant.id}) }}">edytuj</a>
+                </li>
+                <br/>
+            {% endfor %}
+        </ul>
+        {% if (plant is null) %}
+            No new plant registered today. <a href="{{ path('app_plant_new') }}">Want to add a new one?</a>
+        {% endif %}
     </body>
 </html>
