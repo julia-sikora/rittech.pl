@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Poiret+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Poiret+One&display=swap');
+
+#text1
+{
+    color: #474747 !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 30px !important;
+    margin-top: 80px;
+}
+#img1
+{
+    height: 350px;
+    width: 280px;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+a.navbar-brand.logo
+{
+    width: 300px;
+    max-height: 100px;
+}
+.nav-link {
+    color: #474747 !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 20px !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.nav-link:hover {
+    color: #8F8F8F !important;
+}
+body
+{
+    background-color: #6a736e !important;
+}
+#logo {
+    width: 100px;
+    height: 100px;
+}
+
+.logo {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 400;
+    /*font-weight: 400;*/
+    /*font-family: 'Poiret One', cursive;*/
+    font-size: 30px !important;
+    color: #474747;
+}
+.logo:hover {
+    font-family: 'Amatic SC', cursive;
+    /*font-family: 'Poiret One', cursive;*/
+    font-size: 30px !important;
+    color: #474747;
+}

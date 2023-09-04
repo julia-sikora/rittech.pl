@@ -1,0 +1,11 @@
+homepage:
+    title: "Strona główna"
+    text: "Witaj na naszej stronie!"
+    logo: "App for houseplants"
+    plant:
+        list: "Plant list"
+        water: "Watering"
+        pots: "Pot list"
+        login: "Login"
+        register: "Register"
+        contact: "Contact"
