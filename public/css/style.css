@@ -2,6 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Poiret+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Poiret+One&display=swap');
 
+h1
+{
+    color: #474747 !important;
+    font-weight: 700 !important;
+    font-family: 'Poiret One', cursive !important;
+    margin-top: 50px !important;
+    margin-left: 30px !important;
+    margin-bottom: 30px !important;
+}
 #text1
 {
     color: #474747 !important;
@@ -10,6 +19,54 @@
     font-size: 30px !important;
     margin-top: 80px;
 }
+#text2
+{
+    color: #474747 !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 18px !important;
+    margin-top: 80px;
+}
+#new-link
+{
+    color: #474747 !important;
+    font-weight: 400;
+    font-family: 'Poiret One', cursive !important;
+    font-size: 18px !important;
+    margin-top: 70px !important;
+    margin-left: 30px !important;
+}
+th
+{
+    font-size: 18px !important;
+    font-weight: 400;
+}
+td
+{
+    font-weight: 400;
+    font-size: 16px !important;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(71,71,71, 0.2) !important;
+}
+table
+{
+    color: #474747 !important;
+    font-family: 'Poiret One', cursive !important;
+    margin-left: 30px !important;
+    border-collapse: collapse;
+    width: 100%;
+}
+#all-water
+{
+    color: #474747 !important;
+    font-weight: 700 !important;
+    font-family: 'Poiret One', cursive !important;
+    font-size: 20px !important;
+    margin-left: 30px !important;
+}
 #img1
 {
     height: 350px;
@@ -17,10 +74,21 @@
     margin-left: 40px;
     margin-top: 30px;
 }
+#img2
+{
+    height: 400px;
+    width: 280px;
+    margin-left: 40px;
+}
 a.navbar-brand.logo
 {
     width: 300px;
     max-height: 100px;
+}
+#logo-app
+{
+    font-weight: 400 !important;
+    color: #474747 !important;
 }
 .nav-link {
     color: #474747 !important;
@@ -32,8 +100,17 @@ a.navbar-brand.logo
 }
 .nav-link:hover {
     color: #8F8F8F !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 20px !important;
+    margin-left: 20px;
+    margin-right: 20px;
 }
-body
+#plant-list
+{
+    background-color: #d6d8d5 !important;
+}
+#plant-homepage
 {
     background-color: #6a736e !important;
 }
@@ -54,5 +131,17 @@ body
     font-family: 'Amatic SC', cursive;
     /*font-family: 'Poiret One', cursive;*/
     font-size: 30px !important;
-    color: #474747;
+    color: #474747 !important;
+}
+i,a
+{
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    color: #669224 !important;
+    font-size: 19px !important;
+}
+i:hover, a:hover{
+    font-weight: 700 !important;
+    color: #474747 !important;
+    font-size: 19px !important;
 }
