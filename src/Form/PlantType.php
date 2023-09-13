@@ -9,6 +9,7 @@ use App\Entity\PlantPot;
 use App\Repository\PlantPotRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -19,6 +20,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PlantType extends AbstractType
 {
+    public function __construct(private Security $security)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $plantId = $builder->getData()->getId();
@@ -37,7 +42,9 @@ class PlantType extends AbstractType
                                 ->createQueryBuilder('plantPot')
                                 ->leftJoin('plantPot.plant', 'plant')
                                 ->where('plant.id IS NULL OR plant.id = :plantId')
-                                ->setParameter('plantId', $plantId);
+                                ->andWhere('plantPot.user = :user')
+                                ->setParameter('plantId', $plantId)
+                                ->setParameter('user', $this->security->getUser());
                         },
                     'required' => false,
                     'label' => "plant.fields.pot",

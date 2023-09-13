@@ -27,7 +27,7 @@ class PlantPot
     #[ORM\Column]
     private ?float $potDiameter = null;
 
-    #[ORM\OneToOne(mappedBy: 'plantPot', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'plantPot', cascade: ['persist'])]
     private ?Plant $plant = null;
 
     #[ORM\ManyToOne(inversedBy: 'plantPot')]
