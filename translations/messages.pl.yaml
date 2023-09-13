@@ -1,6 +1,56 @@
+flash:
+    message: "Message has been sent!"
+    access: "You don't have access to this page."
+    plant:
+        add: "New plant has been added!"
+        edit: "Plant has been edited!"
+        delete: "Plant has been deleted!"
+    watering:
+        delete: "Watering has been deleted!"
+        water: "Plant has been watered!"
+    pot:
+        add: "New pot has been added!"
+        edit: "Pot has been edited!"
+        delete: "Pot has been deleted!"
+admin:
+    id: "Id"
+    user:
+        id: 'User Id'
+        email: 'Email'
+    content: 'Content'
+register:
+    user_exists: "There is already an account with this email"
+    constraint:
+        password:
+            length: "Your password should be at least %limit% characters"
+            not_blank: "Please enter a password"
+        terms:
+            is_true: "You should agree to our terms."
+    app_password: "Incorrect registration password."
+    title: "Create account"
+    logged: "You are logged in as "
+    new: "Want to register a new account?"
+    logout: "Logout"
+    register: "Register"
+login:
+    title: "Sign in"
+    logged: "You are logged in as "
+    different: "Want to log in to a different account?"
+    logout: "Logout"
+    signin: "Please sign in"
+    email: 'Email'
+    password: 'Password'
+    not: 'You do not have an account? '
+    button: 'Sign in'
+    register: 'Register'
+message:
+    title: "Send message"
+    send: "Send"
+    content: "Message content"
 homepage:
-    title: "Strona główna"
-    text: "Witaj na naszej stronie!"
+    title: "Homepage"
+    text_first: "The site was created so that you no longer have to remember about caring for your pot plants."
+    text_second: "Enter data on the parameters of your plant and we will remind you about watering and fertilizing it."
     logo: "App for houseplants"
     plant:
         list: "Plant list"
@@ -9,3 +59,89 @@ homepage:
         login: "Login"
         register: "Register"
         contact: "Contact"
+        other: 'Other projects'
+    logout: 'Logout'
+    admin:
+        message:
+            title: 'Messages'
+        nav: 'Admin'
+        title: 'Admin'
+water:
+    list:
+        title: "Watering's list"
+    delete:
+        title: "Delete watering"
+watering:
+    delete: "Czy na pewno chcesz usunąć "
+    list:
+        title: "Watering's list:"
+        back: 'Back to list'
+pot:
+    delete:
+        title: "Delete pot"
+        question: "Czy na pewno chcesz usunąć "
+    list:
+        title: "Pots list"
+        id: "Id"
+        producer: "Producer"
+        colour: "Colour"
+        code: "Code"
+        diameter: "Diameter"
+        plant: "Plant"
+        add: "Want to add a new one?"
+        no: "No pots available?"
+        new: "Create a new one"
+    new:
+        title: "Add new pot"
+    edit:
+        title: "Pot editing"
+    fields:
+        colour: "Colour"
+        producer: "Producer"
+        code: "Code"
+        diameter: "Diameter"
+        save: "Save"
+        delete: "Delete"
+plant:
+    plant:
+        list:
+            id: "Id"
+            species: "Species"
+            variety: "Variety"
+            watering: "Last watering"
+            water: "Water all"
+            no: "no watering"
+            add: "Want to add a new one?"
+            last: "Last added plant:"
+            register: "No new plant registered today."
+        details:
+            details: "Plant's details"
+            id: "Id"
+            species: "Species"
+            variety: "Variety"
+            toxicity: "Toxicity"
+            special: "Special features"
+            date: "Date of purchase"
+            pot: "Plant pot"
+            back: "Back to list"
+    delete:
+        title: "Delete plant"
+        content: "Are you sure you want to delete "
+    list:
+        title: "Plants list"
+    new:
+        title: "Add new plant"
+    edit:
+        title: "Plant editing"
+    fields:
+        app_password: "Registration password"
+        species: "Species"
+        variety: "Variety"
+        features: "Special features"
+        toxicity: "Toxicity"
+        date: "Date of purchase"
+        pot: "Pot"
+        save: "Save"
+        email: "Email"
+        password: "Password"
+        agree: "Agree terms"

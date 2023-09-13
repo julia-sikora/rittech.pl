@@ -1,56 +1,57 @@
 {% extends 'base.html.twig' %}
-
 {% set body_id = 'plant-list' %}
-
 {% block body %}
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
-
-    {% if (plant is defined) and (plant is not null) %}
-        last added plant: {{ plant.id }}. {{ plant.variety }} {{ plant.species }}
-    {% endif %}
-
     <div class="container">
         <div class="row">
-            <div class="col-8" id="table">
-                <h1>Plants list:</h1>
-                <table>
-                    <tr>
-                        <th>Id</th>
-                        <th>Species</th>
-                        <th>Variety</th>
-                        <th>Last watering</th>
-                        <th colspan="3"><div id="all-water"><a href="{{ path("app_plant_water_all") }}">Water all <i class="icon-water"></i></a></div></th>
-                    </tr>
-                    {% for plant in plants %}
-                    <tr>
-                        <td><a href="{{ path("app_plant_plant", {id: plant.id}) }}">{{ plant.id }}</a></td>
-                        <td>{{ plant.species }}</td>
-                        <td>{{ plant.variety }}</td>
-                        <td>{% if plant.waterings.last is empty %}brak podlewań
-                            {% elseif plant.waterings.last is not empty %}
-                                <a href="{{ path("app_plant_waterings", {id: plant.id}) }}">
-                                    {{ plant.waterings.last.date|date("m/d/Y") }}</a></td>
-                        <td><a href="{{ path("app_plant_water", {id: plant.id}) }}"><i class="icon-water"></i></a></td>
-                        <td><a href="{{ path("app_plant_edit", {id: plant.id}) }}"><i class="icon-pencil"></i></a></td>
-                        <td><a href="{{ path("app_plant_delete", {id: plant.id}) }}"><i class="icon-cancel"></i></a></td>
+            <div class="col-7" id="table">
+                {% if plants is not empty %}
+                    <h1>{{ "plant.list.title" |trans }}</h1>
+                    <table>
+                        <tr>
+                            <th>{{ "plant.plant.list.id" |trans }}</th>
+                            <th>{{ "plant.plant.list.species" |trans }}</th>
+                            <th>{{ "plant.plant.list.variety" |trans }}</th>
+                            <th>{{ "plant.plant.list.watering" |trans }}</th>
+                            <th colspan="3">
+                                <div id="all-water"><a href="{{ path("app_plant_water_all") }}">
+                                        {{ "plant.plant.list.water" |trans }}<i class="icon-water"></i></a></div>
+                            </th>
+                        </tr>
+                        {% for plant in plants %}
+                            <tr>
+                                <td><a href="{{ path("app_plant_plant", {id: plant.id}) }}">{{ plant.id }}</a></td>
+                                <td>{{ plant.species }}</td>
+                                <td>{{ plant.variety }}</td>
+                                <td>{% if plant.waterings.last is empty %}
+                                    {{ "plant.plant.list.no" |trans }}
+                                    {% elseif plant.waterings.last is not empty %}
+                                    <a href="{{ path("app_plant_waterings", {id: plant.id}) }}">
+                                        {{ plant.waterings.last.date|date("m/d/Y") }}</a></td>{% endif %}
+                                <td>
+                                    <a href="{{ path("app_plant_water", {id: plant.id}) }}"><i class="icon-water"></i></a>
+                                </td>
+                                <td>
+                                    <a href="{{ path("app_plant_edit", {id: plant.id}) }}"><i class="icon-pencil"></i></a>
+                                </td>
+                                <td><a href="{{ path("app_plant_delete", {id: plant.id}) }}"><i class="icon-cancel"></i></a>
+                                </td>
 
-                            {% endif %}
-                    </tr>
-                    {% endfor %}
-                </table>
-
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
                 <div id="new-link">
                     {% if (plant is null) %}
-                        No new plant registered today.
-                        <a href="{{ path('app_plant_new') }}">Want to add a new one?</a>
+                        {{ "plant.plant.list.register" |trans }}
+                        <a href="{{ path('app_plant_new') }}">{{ "plant.plant.list.add" |trans }}</a>
+                    {% else %}
+                        {{ "plant.plant.list.last" |trans }}
+                        {{ plant.id }}. {{ plant.variety }} {{ plant.species }}.
+                        <a href="{{ path('app_plant_new') }}">{{ "plant.plant.list.add" |trans }}</a>
                     {% endif %}
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-5">
                 <img src="{{ asset('image/plants.jpg') }}" alt="logo" id="img2">
             </div>
         </div>

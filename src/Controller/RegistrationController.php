@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,23 +24,24 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $appPassword = $this->getParameter('app.register_password');
+            if ($form->get('appPassword')->getData() !== $appPassword) {
+                $this->addFlash('danger', 'register.app_password');
+                return $this->redirectToRoute('app_register');
+            }
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+            $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
+            try {
+                $entityManager->persist($user);
+                $entityManager->flush();
+            } catch (UniqueConstraintViolationException) {
+                $this->addFlash('danger', 'register.user_exists');
+                return $this->redirectToRoute('app_register');
+            }
 
             return $this->redirectToRoute('app_login');
-        }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        }
+        return $this->render('registration/register.html.twig', ['registrationForm' => $form->createView(), 'title' => 'register.title']);
     }
 }

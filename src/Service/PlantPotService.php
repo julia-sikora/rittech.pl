@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service;
@@ -12,16 +13,15 @@ class PlantPotService
     {
     }
 
-    public function delete($id):void
+    public function delete($id): void
     {
         $plantPot = $this->plantPotRepository->find($id);
         $plant = $plantPot->getPlant();
-        if ($plant != null)
-        {
+        if ($plant != null) {
             $plant->setPlantPot(null);
             $this->entityManager->persist($plant);
         }
         $this->entityManager->remove($plantPot);
         $this->entityManager->flush();
     }
-    }
+}

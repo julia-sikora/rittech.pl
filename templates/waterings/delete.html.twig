@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Delete</title>
-    </head>
+{% extends 'base.html.twig' %}
+{% set body_id = 'pot-list' %}
+{% block body %}
     <body>
-        Czy na pewno chcesz usunąć {{ watering.id }}. {{ watering.date.format('m/d/Y')|default('') }} ?
+        <div id="new-link-delete">
+            {{ "watering.delete" | trans }}{{ watering.id }}. {{ watering.date.format('m/d/Y')|default('') }} ?
+        </div>
         {{ form(form) }}
     </body>
-</html>
+{% endblock %}

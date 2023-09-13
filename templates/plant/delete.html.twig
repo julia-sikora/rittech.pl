@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Delete</title>
-    </head>
+{% extends 'base.html.twig' %}
+{% set body_id = 'plant-list' %}
+
+{% block body %}
     <body>
-Czy na pewno chcesz usunąć {{ plant.id }} {{ plant.variety }} {{ plant.species }} ?
+        <div id="new-link-delete">
+            {{ "plant.delete.content" |trans }}{{ plant.id }} {{ plant.variety }} {{ plant.species }}
+        </div>
         {{ form(form) }}
     </body>
-</html>
+{% endblock %}

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\PlantRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -34,8 +37,12 @@ class Plant
     #[ORM\OneToMany(mappedBy: 'plant', targetEntity: Watering::class)]
     private Collection $waterings;
 
-    #[ORM\OneToOne(inversedBy: 'plant', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'plant', cascade: ['persist'])]
     private ?PlantPot $plantPot = null;
+
+    #[ORM\ManyToOne(inversedBy: 'plant')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -83,12 +90,12 @@ class Plant
         return $this;
     }
 
-    public function getDateOfPurchase(): ?\DateTimeInterface
+    public function getDateOfPurchase(): ?DateTimeInterface
     {
         return $this->dateOfPurchase;
     }
 
-    public function setDateOfPurchase(?\DateTimeInterface $dateOfPurchase): static
+    public function setDateOfPurchase(?DateTimeInterface $dateOfPurchase): static
     {
         $this->dateOfPurchase = $dateOfPurchase;
 
@@ -125,7 +132,6 @@ class Plant
     public function removeWatering(Watering $watering): static
     {
         if ($this->waterings->removeElement($watering)) {
-            // set the owning side to null (unless already changed)
             if ($watering->getPlant() === $this) {
                 $watering->setPlant(null);
             }
@@ -142,6 +148,18 @@ class Plant
     public function setPlantPot(?PlantPot $plantPot): static
     {
         $this->plantPot = $plantPot;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

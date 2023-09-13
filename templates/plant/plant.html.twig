@@ -1,21 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Plant</title>
-    </head>
-    <body>
-        <h1>Plant details</h1>
-        <ul>
-                <li>Id: {{ plant.id }}</li>
-                <li>Species: {{ plant.species }}</li>
-                <li>Variety: {{ plant.variety }}</li>
-                <li>Pot: {{ plant.plantPot.producer }}, {{ plant.plantPot.colour }}</li>
-                <li>Toxicity: {{ plant.toxicity ? 'yes' : 'no' }}</li>
-                {% if plant.specialFeatures is not null %}
-                    <li>Special features: {{ plant.specialFeatures }}</li> {% endif %}
-                <li>Data nabycia: {{ plant.dateOfPurchase|date('Y-m-d') }}</li>
-                <br/>
-        </ul>
-    </body>
-</html>
+{% extends 'base.html.twig' %}
+{% set body_id = 'plant-list' %}
+{% block body %}
+    <div class="container">
+    <div class="row">
+    <div class="col-7" id="table">
+    <h1>{{ title | trans }}</h1>
+    <div class="container">
+    <div class="row">
+        <div class="col-11" id="table">
+            {% if plant is not empty %}
+                <table>
+                    <tr>
+                        <th>{{ "plant.plant.details.id" |trans }}</th>
+                        <th>{{ "plant.plant.details.species" |trans }}</th>
+                        <th>{{ "plant.plant.details.variety" |trans }}</th>
+                        <th>{{ "plant.plant.details.toxicity" |trans }}</th>
+                        {% if plant.specialFeatures is not null %}
+                            <th>{{ "plant.plant.details.special" |trans }}</th>
+                        {% endif %}
+                        <th>{{ "plant.plant.details.date" |trans }}</th>
+                        {% if plant.plantPot is not empty %}
+                            <th>{{ "plant.plant.details.pot" |trans }}</th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>{{ plant.id }}</td>
+                        <td>{{ plant.species }}</td>
+                        <td>{{ plant.variety }}</td>
+                        <td>{{ plant.toxicity ? 'yes' : 'no' }}</td>
+                        {% if plant.specialFeatures is not null %}
+                            <td>{{ plant.specialFeatures }}</td>
+                        {% endif %}
+                        <td>{{ plant.dateOfPurchase|date('Y-m-d') }}</td>
+                        {% if plant.plantPot is not empty %}
+                            <td>{{ plant.plantPot.producer }}, {{ plant.plantPot.colour }}</td>
+                        {% endif %}
+                    </tr>
+                </table>
+            {% endif %}
+            <div id="new-link"><a href="{{ path("app_plant_list") }}">
+                    {{ "plant.plant.details.back" |trans }}</a></div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+{% endblock body %}

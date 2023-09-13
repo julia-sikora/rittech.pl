@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% set body_id = 'plant-list' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8" id="table">
+                {% if messages is not empty %}
+                    <h1>{{ "homepage.admin.message.title" |trans }}</h1>
+                    <table>
+                        <tr>
+                            <th>{{ "admin.id" |trans }}</th>
+                            <th>{{ "admin.user.id" |trans }}</th>
+                            <th>{{ "admin.user.email" |trans }}</th>
+                            <th>{{ "admin.content" |trans }}</th>
+                        </tr>
+                        {% for message in messages %}
+                            <tr>
+                                <td>{{ message.id }}</td>
+                                <td>{{ message.user.id }}</td>
+                                <td>{{ message.user.email }}</td>
+                                <td>{{ message.content }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </div>
+            <div class="col-4">
+            </div>
+        </div>
+    </div>
+{% endblock %}

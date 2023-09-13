@@ -1,11 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Service;
 
 use App\Entity\Plant;
-use App\Entity\Watering;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 class PlantService
@@ -14,7 +13,7 @@ class PlantService
     {
     }
 
-    public function delete(Plant $plant):void
+    public function delete(Plant $plant): void
     {
         $waterings = $plant->getWaterings();
         foreach ($waterings as $watering) {

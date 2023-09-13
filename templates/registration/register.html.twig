@@ -1,17 +1,24 @@
 {% extends "base.html.twig" %}
-{% block title %}Register{% endblock %}
+
+{% set body_id = 'plant-list' %}
+
 {% block body %}
-    <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <div class="container">
+        <div class="row">
+            <div class="col-8" id="form">
+                {% if app.user %}
+                    <div class="mb-3" id='new-link'>
+                        {{ "register.logged" | trans }}{{ app.user.userIdentifier }}.
+                        <br>
+                        {{ "register.new" | trans }}
+                        <a href="{{ path('app_logout') }}">{{ "register.logout" | trans }}</a>
+                    </div>
+                {% elseif app.user is null %}
+                    <h1 class="h1 mb-4 font-weight-normal">{{ "register.register" | trans }}</h1>
+                    {{ form(registrationForm) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

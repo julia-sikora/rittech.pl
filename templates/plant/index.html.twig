@@ -1,19 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% set body_id = 'plant-homepage'%}
+{% set body_id = 'plant-homepage' %}
 
     {% block body %}
-    <body>
         <div class="container">
             <div class="row">
                 <div class="col-8" id="text1">
-                    The site was created so that you no longer have to remember about caring for your pot plants.
+                    {{ "homepage.text_first" |trans }}
                     <br><br>
-                    Enter data on the parameters of your plant and we will remind you about watering and fertilizing it.
+                    {{ "homepage.text_second" |trans }}
                 </div>
                 <div class="col-4">
                     <img src="{{ asset('image/red-cat.png') }}" alt="logo" id="img1">
                 </div>
             </div>
         </div>
-        {% endblock %}
+    {% endblock %}

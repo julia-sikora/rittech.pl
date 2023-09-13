@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -19,13 +20,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/plant')]
 class PlantController extends AbstractController
 {
-    #[Route('/', name: 'app_plant_index')]
-    public function index(): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-        return $this->render('plant/index.html.twig');
-    }
-
     #[Route('/new', name: 'app_plant_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -34,7 +28,8 @@ class PlantController extends AbstractController
         $form = $this->createForm(PlantType::class, $plant);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'New plant has been added!');
+            $this->addFlash('success', 'flash.plant.add');
+            $plant->setUser($this->getUser());
             $entityManager->persist($plant);
             $entityManager->flush();
             $session = $request->getSession();
@@ -42,40 +37,55 @@ class PlantController extends AbstractController
 
             return $this->redirectToRoute('app_plant_list');
         }
-        return $this->render('plant/new.html.twig', ['form' => $form]);
+        return $this->render('plant/new.html.twig', ['form' => $form, 'title' => 'plant.new.title']);
     }
 
     #[Route('/edit/{id}', name: 'app_plant_edit')]
     public function edit(Plant $plant, Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-        //mozemy wyszukac ktory to plant po {id}
-        //ale symfony samo to robi po dopasowaniu {id} do "Plant $plant"
+
+        if ($plant->getUser()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('danger', 'flash.access');
+            return $this->redirectToRoute('app_plant_list');
+        }
+
         $form = $this->createForm(PlantType::class, $plant);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('success', 'Plant has been edited!');
             $entityManager->persist($plant);
             $entityManager->flush();
+            $this->addFlash('success', 'flash.plant.edit');
             return $this->redirectToRoute('app_plant_list');
         }
-        return $this->render('plant/new.html.twig', ['form' => $form]);
+        return $this->render('plant/new.html.twig', ['form' => $form, 'title' => 'plant.edit.title']);
     }
 
     #[Route('/delete/{id}', name: 'app_plant_delete')]
     public function delete(PlantService $plantService, Plant $plant, Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+
+        if ($plant->getUser()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('danger', 'flash.access');
+            return $this->redirectToRoute('app_plant_list');
+        }
+
         $form = $this->createFormBuilder()
-            ->add('delete', SubmitType::class)
+            ->add('delete', SubmitType::class,
+                [
+                    'label' => "pot.fields.delete",
+                    'attr' => ['class' => 'delete']
+                ]
+            )
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $plantService->delete($plant);
-            $this->addFlash('success', 'Plant has been deleted!');
+            $this->addFlash('success', 'flash.plant.delete');
             return $this->redirectToRoute('app_plant_list');
         }
-        return $this->render('plant/delete.html.twig', ['form' => $form, 'plant' => $plant]);
+        return $this->render('plant/delete.html.twig', ['form' => $form, 'plant' => $plant, 'title' => 'plant.delete.title']);
     }
 
     #[Route('/list', name: 'app_plant_list')]
@@ -83,64 +93,87 @@ class PlantController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         $session = $request->getSession();
-        $newPlant = null;
-        $plantId = $session->get('plant-id');
-        if ($plantId !== null) {
-            $newPlant = $plantRepository->find($plantId);
-        }
-        return $this->render('plant/list.html.twig',
-            ['plants' => $plantRepository->findAll(), 'plant' => $newPlant]);
+        $plants = $plantRepository->findBy(['user' => $this->getUser()]);
+        $lastPlant = $plantRepository->findOneBy(['id' => $session->get('plant-id'), 'user' => $this->getUser()]);
+        return $this->render('plant/list.html.twig', ['plants' => $plants, 'plant' => $lastPlant, 'title' => 'plant.list.title']);
     }
 
     #[Route('/plant/{id}', name: 'app_plant_plant')]
-    public function plant($id, PlantRepository $plantRepository): Response
+    public function plant(Plant $plant): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-        return $this->render('plant/plant.html.twig',
-            ['plant' => $plantRepository->find($id)]);
+
+        if ($plant->getUser()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('danger', 'flash.access');
+            return $this->redirectToRoute('app_plant_list');
+        }
+
+        return $this->render('plant/plant.html.twig', ['plant' => $plant, 'title' => 'plant.plant.details.details']);
     }
 
     #[Route('/waterings/{id}', name: 'app_plant_waterings')]
-    public function waterings($id, PlantRepository $plantRepository): Response
+    public function waterings(Plant $plant): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
-        return $this->render('waterings/list.html.twig',
-            ['plant' => $plantRepository->find($id)]);
+
+        if ($plant->getUser()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('danger', 'flash.access');
+            return $this->redirectToRoute('app_plant_list');
+        }
+
+        return $this->render('waterings/list.html.twig', ['plant' => $plant, 'title' => 'water.list.title']);
     }
 
     #[Route('/watering/delete/{id}', name: 'app_plant_watering_delete')]
     public function wateringDelete(Watering $watering, Request $request, WateringService $wateringService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+
+        if ($watering->getPlant()->getUser()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('danger', 'flash.access');
+            return $this->redirectToRoute('app_plant_list');
+        }
+
         $form = $this->createFormBuilder()
-            ->add('delete', SubmitType::class)
+            ->add('delete', SubmitType::class,
+                [
+                    'label' => "pot.fields.delete",
+                    'attr' => ['class' => 'delete']
+                ]
+            )
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $wateringService->delete($watering);
-            $this->addFlash('success', 'Watering has been deleted!');
-            return $this->redirectToRoute('app_plant_list', ['id'=>$watering->getPlant()->getId()]);
+            $this->addFlash('success', 'flash.watering.delete');
+            return $this->redirectToRoute('app_plant_list', ['id' => $watering->getPlant()->getId()]);
         }
-        return $this->render('waterings/delete.html.twig', ['form' => $form, 'watering' => $watering]);
+        return $this->render('waterings/delete.html.twig', ['form' => $form, 'watering' => $watering, 'title' => 'water.delete.title']);
     }
+
     #[Route('/water/{id<\d+>}', name: 'app_plant_water')]
     public function water(WateringService $wateringService, Plant $plant): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
 
+        if ($plant->getUser()->getId() !== $this->getUser()->getId()) {
+            $this->addFlash('danger', 'flash.access');
+            return $this->redirectToRoute('app_plant_list');
+        }
+
         $wateringService->water($plant);
 
-        $this->addFlash('success', 'Plant has been watered!');
+        $this->addFlash('success', 'flash.watering.water');
         return $this->redirectToRoute("app_plant_list");
     }
+
     #[Route('/water/all', name: 'app_plant_water_all')]
     public function waterAll(WateringService $wateringService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
 
-        $wateringService->waterAll();
-
-        $this->addFlash('success', 'Plant has been watered!');
+        $wateringService->waterAll($this->getUser());
+        $this->addFlash('success', 'flash.watering.water');
         return $this->redirectToRoute("app_plant_list");
     }
 }

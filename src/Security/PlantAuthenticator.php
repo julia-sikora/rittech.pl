@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use Symfony\Bundle\SecurityBundle\Security;
@@ -47,7 +49,7 @@ class PlantAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-        return new RedirectResponse($this->urlGenerator->generate('app_plant_index'));
+        return new RedirectResponse($this->urlGenerator->generate('app_homepage'));
     }
 
     protected function getLoginUrl(Request $request): string

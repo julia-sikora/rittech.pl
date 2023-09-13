@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\WateringRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +18,7 @@ class Watering
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $date = null;
+    private ?DateTimeInterface $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'waterings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -26,12 +29,12 @@ class Watering
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(?\DateTimeInterface $date): static
+    public function setDate(?DateTimeInterface $date): static
     {
         $this->date = $date;
 

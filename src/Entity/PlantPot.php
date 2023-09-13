@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\PlantPotRepository;
@@ -27,6 +29,15 @@ class PlantPot
 
     #[ORM\OneToOne(mappedBy: 'plantPot', cascade: ['persist', 'remove'])]
     private ?Plant $plant = null;
+
+    #[ORM\ManyToOne(inversedBy: 'plantPot')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    public function __toString(): string
+    {
+        return $this->getProducer() . " " . $this->getColour();
+    }
 
     public function getId(): ?int
     {
@@ -88,17 +99,27 @@ class PlantPot
 
     public function setPlant(?Plant $plant): static
     {
-        // unset the owning side of the relation if necessary
         if ($plant === null && $this->plant !== null) {
             $this->plant->setPlantPot(null);
         }
 
-        // set the owning side of the relation if necessary
         if ($plant !== null && $plant->getPlantPot() !== $this) {
             $plant->setPlantPot($this);
         }
 
         $this->plant = $plant;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
