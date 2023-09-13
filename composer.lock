@@ -1,20 +1,20 @@
 {
-    "_readme": [
-        "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
-        "This file is @generated automatically"
-    ],
-    "content-hash": "a91f55b1f51c77115bbbff664bd4b5e0",
-    "packages": [
-        {
-            "name": "doctrine/cache",
-            "version": "2.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/cache.git",
-                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb"
-            },
-            "dist": {
+  "_readme": [
+    "This file locks the dependencies of your project to a known state",
+    "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+    "This file is @generated automatically"
+  ],
+  "content-hash": "f291cb12f9ee0b522a1642734d5a41e4",
+  "packages": [
+    {
+      "name": "doctrine/cache",
+      "version": "2.2.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/doctrine/cache.git",
+        "reference": "1ca8f21980e770095a31456042471a57bc4c68fb"
+      },
+      "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/cache/zipball/1ca8f21980e770095a31456042471a57bc4c68fb",
                 "reference": "1ca8f21980e770095a31456042471a57bc4c68fb",
@@ -1933,26 +1933,52 @@
             "description": "Common interface for logging libraries",
             "homepage": "https://github.com/php-fig/log",
             "keywords": [
-                "log",
-                "psr",
-                "psr-3"
+              "log",
+              "psr",
+              "psr-3"
             ],
-            "support": {
-                "source": "https://github.com/php-fig/log/tree/3.0.0"
-            },
-            "time": "2021-07-14T16:46:02+00:00"
+          "support": {
+            "source": "https://github.com/php-fig/log/tree/3.0.0"
+          },
+          "time": "2021-07-14T16:46:02+00:00"
         },
-        {
-            "name": "symfony/asset",
-            "version": "v6.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/asset.git",
-                "reference": "b77a4cc8e266b7e0db688de740f9ee7253aa411c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/asset/zipball/b77a4cc8e266b7e0db688de740f9ee7253aa411c",
+    {
+      "name": "symfony/apache-pack",
+      "version": "v1.0.1",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/apache-pack.git",
+        "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/apache-pack/zipball/3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+        "reference": "3aa5818d73ad2551281fc58a75afd9ca82622e6c",
+        "shasum": ""
+      },
+      "type": "symfony-pack",
+      "notification-url": "https://packagist.org/downloads/",
+      "license": [
+        "MIT"
+      ],
+      "description": "A pack for Apache support in Symfony",
+      "support": {
+        "issues": "https://github.com/symfony/apache-pack/issues",
+        "source": "https://github.com/symfony/apache-pack/tree/master"
+      },
+      "time": "2017-12-12T01:46:35+00:00"
+    },
+    {
+      "name": "symfony/asset",
+      "version": "v6.3.0",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/symfony/asset.git",
+        "reference": "b77a4cc8e266b7e0db688de740f9ee7253aa411c"
+      },
+      "dist": {
+        "type": "zip",
+        "url": "https://api.github.com/repos/symfony/asset/zipball/b77a4cc8e266b7e0db688de740f9ee7253aa411c",
                 "reference": "b77a4cc8e266b7e0db688de740f9ee7253aa411c",
                 "shasum": ""
             },
