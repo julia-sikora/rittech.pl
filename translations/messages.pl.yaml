@@ -72,14 +72,14 @@ water:
     delete:
         title: "Delete watering"
 watering:
-    delete: "Czy na pewno chcesz usunąć "
+    delete: "Are you sure you want to delete "
     list:
         title: "Watering's list:"
         back: 'Back to list'
 pot:
     delete:
         title: "Delete pot"
-        question: "Czy na pewno chcesz usunąć "
+        question: "Are you sure you want to delete "
     list:
         title: "Pots list"
         id: "Id"
