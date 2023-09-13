@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+{% set body_id = 'plant-list' %}
+{% block body %}
+    <div class="container">
+    <div class="row">
+    <div class="col-7" id="table">
+    <h1>{{ title | trans }}</h1>
+    <div class="container">
+    <div class="row">
+        <div class="col-11" id="table">
+            {% if plant is not empty %}
+                <table>
+                    <tr>
+                        <th>{{ "plant.plant.details.id" |trans }}</th>
+                        <th>{{ "plant.plant.details.species" |trans }}</th>
+                        <th>{{ "plant.plant.details.variety" |trans }}</th>
+                        <th>{{ "plant.plant.details.toxicity" |trans }}</th>
+                        {% if plant.specialFeatures is not null %}
+                            <th>{{ "plant.plant.details.special" |trans }}</th>
+                        {% endif %}
+                        <th>{{ "plant.plant.details.date" |trans }}</th>
+                        {% if plant.plantPot is not empty %}
+                            <th>{{ "plant.plant.details.pot" |trans }}</th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>{{ plant.id }}</td>
+                        <td>{{ plant.species }}</td>
+                        <td>{{ plant.variety }}</td>
+                        <td>{{ plant.toxicity ? 'yes' : 'no' }}</td>
+                        {% if plant.specialFeatures is not null %}
+                            <td>{{ plant.specialFeatures }}</td>
+                        {% endif %}
+                        <td>{{ plant.dateOfPurchase|date('Y-m-d') }}</td>
+                        {% if plant.plantPot is not empty %}
+                            <td>{{ plant.plantPot.producer }}, {{ plant.plantPot.colour }}</td>
+                        {% endif %}
+                    </tr>
+                </table>
+            {% endif %}
+            <div id="new-link"><a href="{{ path("app_plant_list") }}">
+                    {{ "plant.plant.details.back" |trans }}</a></div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% set body_id = 'pot-list' %}
+{% block body %}
+    <div class="container">
+        {% if pots is not empty %}
+            <div class="row">
+                <div id="table">
+
+                    <h1>{{ "pot.list.title" |trans }}</h1>
+
+                    <table>
+                        <tr>
+                            <th>{{ "pot.list.id" |trans }}</th>
+                            <th>{{ "pot.list.producer" |trans }}</th>
+                            <th>{{ "pot.list.colour" |trans }}</th>
+                            <th>{{ "pot.list.diameter" |trans }}</th>
+                            <th>{{ "pot.list.code" |trans }}</th>
+                            <th>{{ "pot.list.plant" |trans }}</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        {% for pot in pots %}
+                            <tr>
+                                <td>{{ pot.id }}</td>
+                                <td>{{ pot.producer }}</td>
+                                <td>{{ pot.colour }}</td>
+                                <td>{{ pot.potDiameter }}</td>
+                                <td>{{ pot.potCode }}</td>
+                                <td>{{ pot.plant.variety|default }} {{ pot.plant.species|default }}</td>
+                                <td><a href="{{ path("app_pot_edit", {'id': pot.id}) }}"><i class="icon-pencil"></i></a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_pot_delete', {'id': pot.id}) }}"><i class="icon-cancel"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+
+                    <div id="new-link-pot">
+                        <a href="{{ path('app_pot_new') }}">{{ "pot.list.add" |trans }}</a>
+                        <img src="{{ asset('image/pot1.jpg') }}" alt="logo" id="img3">
+                        <img src="{{ asset('image/pot2.png') }}" alt="logo" id="img4">
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div id="new-link">
+            {% if pots is empty %}
+                {{ "pot.list.no" | trans }} <a href="{{ path('app_pot_new') }}">{{ "pot.list.new" | trans }}</a>
+                <img src="{{ asset('image/pot1.jpg') }}" alt="logo" id="img3">
+                <img src="{{ asset('image/pot2.png') }}" alt="logo" id="img4">
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}

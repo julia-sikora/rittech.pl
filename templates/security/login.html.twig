@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% set body_id = 'plant-list' %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8" id="form">
+                <form method="post">
+                    {% if app.user %}
+                        <div class="mb-3" id='new-link'>
+                            {{ "login.logged" | trans }} {{ app.user.userIdentifier }}.
+                            <br>
+                            {{ "login.different" |trans }}
+                            <a href="{{ path('app_logout') }}">{{ "login.logout" |trans }}</a>
+                        </div>
+                    {% elseif app.user is null %}
+                        <h1 class="h1 mb-4 font-weight-normal">{{ "login.signin" | trans }}</h1>
+                        <label class="label-login" for="inputEmail">{{ "login.email" | trans }}</label>
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input-control input-login" autocomplete="email" required autofocus>
+                        <label class="label-login" for="inputPassword">{{ "login.password" | trans }}</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control input-control input-login" autocomplete="current-password" required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <button class="button save save-login" type="submit">{{ "login.button" | trans }}</button>
+                        <div id="new-link-login">{{ "login.not" | trans }}
+                            <a href="{{ path('app_register') }}">{{ "login.register" | trans }}</a></div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

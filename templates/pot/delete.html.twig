@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% set body_id = 'pot-list' %}
+{% block body %}
+    <body>
+        <div id="new-link-delete">
+            {{ "pot.delete.question" | trans }}{{ pot.id }} {{ pot.colour }} {{ pot.producer }} ?
+        </div>
+        {{ form(form) }}
+    </body>
+{% endblock %}
