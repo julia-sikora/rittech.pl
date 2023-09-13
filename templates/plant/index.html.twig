@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% set body_id = 'plant-homepage' %}
+
+    {% block body %}
+        <div class="container">
+            <div class="row">
+                <div class="col-8" id="text1">
+                    {{ "homepage.text_first" |trans }}
+                    <br><br>
+                    {{ "homepage.text_second" |trans }}
+                </div>
+                <div class="col-4">
+                    <img src="{{ asset('image/red-cat.png') }}" alt="logo" id="img1">
+                </div>
+            </div>
+        </div>
+    {% endblock %}

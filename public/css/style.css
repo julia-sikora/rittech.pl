@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Poiret+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Poiret+One&display=swap');
+
+h1
+{
+    color: #474747 !important;
+    font-weight: 700 !important;
+    font-family: 'Poiret One', cursive !important;
+    margin-top: 50px !important;
+    margin-left: 25px !important;
+    margin-bottom: 30px !important;
+}
+#text1
+{
+    color: #474747 !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 30px !important;
+    margin-top: 80px;
+}
+
+#text2 {
+    color: #474747 !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 18px !important;
+    margin-top: 80px;
+}
+
+#new-link {
+    color: #474747 !important;
+    font-weight: 400;
+    font-family: 'Poiret One', cursive !important;
+    font-size: 18px !important;
+    margin-top: 30px !important;
+    margin-left: 30px !important;
+    margin-bottom: 30px !important;
+}
+
+#new-link-pot {
+    color: #474747 !important;
+    font-weight: 400;
+    font-family: 'Poiret One', cursive !important;
+    font-size: 18px !important;
+    margin-left: 30px !important;
+}
+
+#new-link-delete {
+    color: #474747 !important;
+    font-weight: 400;
+    font-family: 'Poiret One', cursive !important;
+    font-size: 18px !important;
+    margin-top: 30px !important;
+    margin-right: 30px !important;
+    margin-left: 55px !important;
+}
+
+.delete {
+    margin-left: 25px;
+    margin-top: 15px;
+    font-size: 15px !important;
+    border: #474747 solid 1px !important;
+    border-radius: 10%;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive !important;
+}
+
+#new-link-login {
+    color: #474747 !important;
+    font-weight: 400;
+    font-family: 'Poiret One', cursive !important;
+    font-size: 18px !important;
+    margin-left: 25px !important;
+}
+
+th {
+    font-size: 18px !important;
+    font-weight: 400;
+}
+
+td {
+    font-weight: 400;
+    font-size: 16px !important;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(71, 71, 71, 0.2) !important;
+}
+
+table {
+    color: #474747 !important;
+    font-family: 'Poiret One', cursive !important;
+    margin-left: 30px !important;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#all-water {
+    color: #474747 !important;
+    font-weight: 700 !important;
+    font-family: 'Poiret One', cursive !important;
+    font-size: 20px !important;
+    margin-left: 30px !important;
+}
+
+#img1 {
+    height: 330px;
+    width: 230px;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+
+#img2 {
+    height: 400px;
+    width: 280px;
+    margin-left: 40px;
+}
+
+#img3 {
+    height: 180px;
+    width: 165px;
+    margin-left: 15px;
+}
+
+#img4 {
+    height: 135px;
+    width: 80px;
+    vertical-align: bottom;
+}
+
+#img5 {
+    height: 300px;
+    width: 400px;
+    margin-top: 60px !important;
+}
+
+#img6 {
+    height: 400px;
+    width: 400px;
+}
+
+a.navbar-brand.logo {
+    width: 300px;
+    max-height: 100px;
+}
+
+#logo-app {
+    font-weight: 400 !important;
+    color: #474747 !important;
+}
+
+.nav-link {
+    color: #474747 !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 20px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+}
+
+.nav-link:hover {
+    color: #8F8F8F !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 20px !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nav-link-dropdown {
+    color: #474747 !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 17px !important;
+}
+
+.nav-link-dropdown:hover {
+    color: #8F8F8F !important;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 17px !important;
+}
+
+#security {
+    background-color: #616769 !important;
+}
+
+#plant-list {
+    background-color: #d6d8d5 !important;
+}
+
+#contact {
+    background-color: #f6e3df !important;
+}
+
+#pot-list {
+    background-color: #d8ece1 !important;
+}
+
+#plant-homepage {
+    background-color: #6a736e !important;
+}
+
+#logo {
+    width: 100px;
+    height: 100px;
+}
+
+.logo {
+    font-family: 'Amatic SC', cursive;
+    font-weight: 400;
+    /*font-weight: 400;*/
+    /*font-family: 'Poiret One', cursive;*/
+    font-size: 30px !important;
+    color: #474747;
+}
+.logo:hover {
+    font-family: 'Amatic SC', cursive;
+    /*font-family: 'Poiret One', cursive;*/
+    font-size: 30px !important;
+    color: #474747 !important;
+}
+
+i, a {
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    color: #669224 !important;
+    font-size: 19px !important;
+}
+
+i:hover, a:hover {
+    font-weight: 700 !important;
+    color: #474747 !important;
+    font-size: 19px !important;
+}
+
+.form-control {
+    width: auto !important;
+    background-color: rgb(232, 240, 254) !important;
+}
+
+.form-select {
+    margin-left: 25px !important;
+}
+
+.input-control {
+    width: auto !important;
+}
+
+.form-group {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    margin-left: 5px !important;
+    line-height: normal !important;
+}
+
+label {
+    margin-top: 1%;
+    font-size: 2em;
+    display: table-cell;
+    text-align: right;
+    margin-left: 25px !important;
+}
+
+.label-form {
+    font-size: 18px !important;
+    font-family: 'Poiret One', cursive !important;
+    color: #474747 !important;
+    font-weight: 700;
+    margin-right: 25px !important;
+    margin-left: 25px !important;
+}
+
+.label-login {
+    font-size: 18px !important;
+    font-family: 'Poiret One', cursive !important;
+    color: #474747 !important;
+    font-weight: 700;
+    margin-top: 20px !important;
+    margin-bottom: 5px !important;
+}
+
+.input-login {
+    margin-left: 25px !important;
+    color: #474747 !important;
+}
+
+input {
+    display: table-cell;
+    margin-left: 25px !important;
+}
+
+.save {
+    margin: 25px;
+    font-size: 15px !important;
+    border: #474747 solid 1px !important;
+    border-radius: 10%;
+    font-weight: 700;
+    font-family: 'Poiret One', cursive !important;
+}
+
+.save-login {
+    margin-top: 25px !important;
+    margin-bottom: 10px !important;
+    margin-left: 25px !important;
+}
+
+.save-register {
+    margin-left: 25px !important;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+.form-date {
+    margin-right: 25px !important;
+    margin-left: 25px !important;
+}
+
+#list {
+    font-size: 18px !important;
+    font-family: 'Poiret One', cursive !important;
+    color: #474747 !important;
+    margin-left: 50px !important;
+}
+
+#title-list {
+    font-size: 20px !important;
+    font-family: 'Poiret One', cursive !important;
+    color: #474747 !important;
+    margin-left: 50px !important;
+}
+
+#message {
+    margin-top: 50px;
+    /*margin-left: 20px;*/
+}
+
+#form {
+    margin-left: 30px;
+}

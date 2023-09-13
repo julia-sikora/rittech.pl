@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% set body_id = 'pot-list' %}
+
+{% block body %}
+    <body>
+        <h1>{{ title | trans }}</h1>
+        {{ form(form) }}
+    </body>
+{% endblock body %}

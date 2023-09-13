@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% set body_id = 'pot-list' %}
+{% block body %}
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h1>{{ "watering.list.title" | trans }}</h1>
+                    <div id="title-list">
+                        {% if plant.waterings is not empty %}
+                        {{ plant.id }}. {{ plant.species }} {{ plant.variety }}
+                    </div>
+                    <br/>
+                    <div id="list">
+                        {% for watering in plant.waterings %}
+                            <li>
+                                {{ watering.date.format('m/d/Y')|default('') }}
+                                <a href="{{ path('app_plant_watering_delete', {id: watering.id}) }}"><i class="icon-cancel"></i></a>
+                            </li>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div id="new-link">
+                        <a href="{{ path("app_plant_list") }}">{{ "watering.list.back" |trans }}</a>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <img src="{{ asset('image/water.png') }}" alt="logo" id="img5">
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+{% endblock body %}

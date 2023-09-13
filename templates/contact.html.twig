@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% set body_id = 'contact' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-7" id="message">
+                {{ form(form) }}
+            </div>
+            <div class="col-5">
+                <img src="{{ asset('image/cat-plant.jpg') }}" alt="logo" id="img6">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
