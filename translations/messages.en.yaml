@@ -15,6 +15,7 @@ flash:
 admin:
     id: "Id"
     user:
+        title: 'Users list'
         id: 'User Id'
         email: 'Email'
     content: 'Content'
@@ -66,6 +67,8 @@ homepage:
             title: 'Messages'
         nav: 'Admin'
         title: 'Admin'
+        users:
+            title: 'messages'
 water:
     list:
         title: "Watering's list"
