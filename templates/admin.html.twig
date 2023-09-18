@@ -25,6 +25,19 @@
                         {% endfor %}
                     </table>
                 {% endif %}
+                {% if users is not empty %}
+                    <h1>{{ "admin.user.title" |trans }}</h1>
+                    <table>
+                        <tr>
+                            <th>{{ "admin.user.email" |trans }}</th>
+                        </tr>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
             </div>
             <div class="col-4">
             </div>
